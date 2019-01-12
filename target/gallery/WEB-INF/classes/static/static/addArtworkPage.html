@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>美术馆信息管理系统</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/table1.js"></script>
+
+</head>
+<body>
+<div class="jumbotron text-center" style="background:url(/static/static/b1.jpg);background-size:cover;margin-bottom:0">
+  <h1>美术馆信息管理系统</h1> 
+</div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul id="menu" class="nav navbar-nav">
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <form role="form">
+        <div class="form-group">
+          <label for="artWorkName">美术品名称</label><input type="text" class="form-control" id="artWorkName" />
+        </div>
+        <div class="form-group">
+          <label for="painter">作者</label><input type="text" class="form-control" id="painter" />
+        </div>
+        <div class="form-group">
+          <label for="painter">描述</label><textarea type="textarea" class="form-control" id="describe"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputFile">上传相关照片</label><input type="file" id="exampleInputFile" />
+          <p class="help-block">
+          </p>
+        </div>
+        <button onclick="addArtwork()" class="btn btn-default">上传</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

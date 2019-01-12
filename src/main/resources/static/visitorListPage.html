@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>美术馆信息管理系统</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src=" table1.js"></script>
+
+</head>
+<body>
+<div class="jumbotron text-center" style="background:url(b1.jpg);background-size:cover;margin-bottom:0">
+  <h1>美术馆信息管理系统</h1> 
+</div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a id="artworksListPage" href="#">展品管理</a></li>
+        <li class="active"><a id="userManagePage" href="#">用户管理</a></li>
+        <li><a id="addArtworkPage" href="#">添加展品</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <table id="userListTable" class="table">
+  </table>
+</div>
+<script type="text/javascript">
+    function delVisitor(e){
+        $.get("delVisitors",{"id":e},function(data) {
+            if(data==true)
+                alert("删除成功");
+            else
+                alert("删除失败");
+            location.reload();
+        });
+    }
+    $(document).ready(function() {
+        var userListTableString='getPage Error';
+        $.get( "getAllVisitors",function (data) {
+            userListTableString += "<caption>访客列表</caption>";
+            userListTableString += '<thead><tr><th>id</th><th>名称</th><th>访问时间</th></tr></thead><tbody>'
+            for (var i = 0; i < data.length; i++) {
+                userListTableString += '<tr><th>';
+                userListTableString += data[i].id;
+                userListTableString += '</th>';
+                userListTableString += '<th>';
+                userListTableString += data[i].name;
+                userListTableString += '</th>';
+                userListTableString += '<th>';
+                userListTableString += data[i].note;
+                userListTableString += '</th>';
+                userListTableString += '<th>';
+                userListTableString += data[i].date;
+                userListTableString += '</th>';
+                userListTableString += '<th>';
+                userListTableString += '<button  onclick="delVisitor('+data[i].id + ')" class="btn btn-default">删除</button>';
+                userListTableString += '</th></tr>';
+            }
+            userListTableString += '</tbody>'
+        });
+        $("#userListTable").html(userListTableString);
+    });
+</script>
+</body>
+</html>

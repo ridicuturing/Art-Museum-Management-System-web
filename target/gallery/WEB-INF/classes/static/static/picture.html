@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="utf-8">
+	<title>美术馆信息管理系统</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="\table1.js"></script>
+
+</head>
+<body background="" style=" background-repeat:no-repeat;background-size:100% 100%;background-attachment: fixed;" >
+<div class="jumbotron text-center" style="background:url(/static/static/b1.jpg);background-size:cover;margin-bottom:0"><!--"background:url(/b1.jpg);background-size:cover;"-->
+  <h1>美术馆信息管理系统</h1>
+</div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul id="menu" class="nav navbar-nav">
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-md-12 column">
+        <dl>
+          <dt>
+            url
+          </dt>
+          <dd >
+            <a id = "pictureShowName"></a>
+          </dd>
+          <dt>
+            关联的艺术品id
+          </dt>
+          <dd >
+              <a id = "artworkId"></a>
+          </dd>
+          <dt>
+            描述
+          </dt>
+          <dd id = "pictureShowDescribe">
+          </dd>
+          <dt>
+          相关图片
+        </dt>
+          <dd id="pictureShowpicture2">
+            <img id = "pictureShowpicture" src="">
+          </dd>
+          <dt>
+            管理情况
+          </dt>
+          <dd id = "pictureShowManagement">
+          </dd>
+        </dl>
+        <input type="button" value="修改" onclick="jump('/modifyPicturePage.html?' + window.location.href.split('?')[1])" class="btn btn-default"></input>
+        <input type="button" value="删除" onclick="delPicture(window.location.href.split('?')[1])" class="btn btn-default"></input>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    var id=window.location.href.split("?")[1];
+    $.get(
+        "/getPictureMessage",
+        {"id":id},
+        function(data){
+            $("#pictureShowName").html(data.url);
+            $("#pictureShowName").attr("href",data.url);
+            $("#artworkId").html(data.artworkId);
+            $("#artworkId").attr("href","/artwork.html?" + id);
+            if(data.describe!=null)
+                $("#pictureShowDescribe").html(data.describe);
+            else
+                $("#pictureShowDescribe").html("无");
+            if(data.pictureUrl!=null)
+                $("#pictureShowpicture").attr("src",data.url);
+            else
+                $("#pictureShowpicture2").html("无");
+            $("#pictureShowManagement").html("创建人员id:" + data.managerId + ",加入时间:" + data.date);
+        }
+    );
+</script>
+
+</body>
+</html>

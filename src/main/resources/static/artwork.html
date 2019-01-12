@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="utf-8">
+	<title>美术馆信息管理系统</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src=" table1.js"></script>
+
+</head>
+<body background="" style=" background-repeat:no-repeat;background-size:100% 100%;background-attachment: fixed;" >
+<div class="jumbotron text-center" style="background:url(b1.jpg);background-size:cover;margin-bottom:0"><!--"background:url(b1.jpg);background-size:cover;"-->
+  <h1>美术馆信息管理系统</h1>
+</div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul id="menu" class="nav navbar-nav">
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-md-12 column">
+        <dl>
+          <dt>
+            名称
+          </dt>
+          <dd id = "artworkShowName">
+          </dd>
+          <dt>
+            作者
+          </dt>
+          <dd id = "artworkShowPainter">
+          </dd>
+          <dt>
+            描述
+          </dt>
+          <dd id = "artworkShowDescribe">
+          </dd>
+          <dt>
+          相关图片
+        </dt>
+          <dd id="artworkShowpicture2">
+            <img id = "artworkShowpicture" src="">
+          </dd>
+          <dt>
+            管理情况
+          </dt>
+          <dd id = "artworkShowManagement">
+          </dd>
+        </dl>
+        <button onclick="jump('modifyArtworkPage.html?' + window.location.href.split('?')[1])" class="btn btn-default">修改</button>
+        <button onclick="delArtwork(window.location.href.split('?')[1])" class="btn btn-default">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $.get(
+         "getArtworkMessage",
+        {"id":window.location.href.split("?")[1]},
+        function(data){
+            $("#artworkShowName").html(data.name);
+            $("#artworkShowPainter").html(data.painter);
+            if(data.describe=="")
+                $("#artworkShowDescribe").html(data.describe);
+            else
+                $("#artworkShowDescribe").html("无");
+            if(data.artworkUrl!=null)
+                $("#artworkShowpicture").attr("src",data.artworkUrl);
+            else
+                $("#artworkShowpicture2").html("无");
+            $("#artworkShowManagement").html("创建人员id:" + data.managerId + ",加入时间:" + data.date);
+        }
+    );
+</script>
+
+</body>
+</html>

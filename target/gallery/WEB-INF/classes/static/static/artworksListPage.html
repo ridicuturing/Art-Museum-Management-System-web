@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="utf-8">
+	<title>美术馆信息管理系统</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="\table1.js"></script>
+
+</head>
+<body background="" style=" background-repeat:no-repeat;background-size:100% 100%;background-attachment: fixed;" >
+<div class="jumbotron text-center" style="background:url(/static/static/b1.jpg);background-size:cover;margin-bottom:0"><!--"background:url(/b1.jpg);background-size:cover;"-->
+  <h1>美术馆信息管理系统</h1>
+</div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <li class="active"><a id="artworksListPage"href="#">展品管理</a></li>
+      <li><a id="userManagePage" href="#">用户管理</a></li>
+      <li><a id="addArtworkPage" href="#">添加展品</a></li>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <table id="artworkListTable" class="table">
+  </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var artworkListTableString='getPage Error';
+        $.get("/getPage",function (data) {
+            artworkListTableString += "<caption>展品</caption>";
+            artworkListTableString += '<thead><tr><th>id</th><th>名称</th><th>作者</th><th>网络地址</th><th>加入时间</th><th>操作</th></tr></thead><tbody>'
+
+            for (var i = 0; i < data.total; i++) {
+                artworkListTableString += '<tr><th>';
+                artworkListTableString += data.list[i].id;
+                artworkListTableString += '</th>';
+                artworkListTableString += '<th>';
+                artworkListTableString += data.list[i].name;
+                artworkListTableString += '</th>';
+                artworkListTableString += '<th>';
+                artworkListTableString += data.list[i].painter;
+                artworkListTableString += '</th>';
+                artworkListTableString += '<th>';
+                artworkListTableString += '<a href=' + data.list[i].artworkUrl + '>' + data.list[i].artworkUrl + '</a>';
+                artworkListTableString += '</th>';
+                artworkListTableString += '<th>';
+                artworkListTableString += data.list[i].date;
+                artworkListTableString += '</th>';
+                artworkListTableString += '<th>';
+                artworkListTableString += '<button type="button" onclick="jump(\'/artwork.html?' + data.list[i].id + '\')"class="btn btn-default">详情</button>';
+                artworkListTableString += '<button type="button" onclick="delArtwork('+data.list[i].id+')" class="btn btn-default">删除</button>';
+                artworkListTableString += '</th></tr>';
+            }
+            artworkListTableString += '</tbody>'
+        });
+        $("#artworkListTable").html(artworkListTableString);
+    });
+</script>
+</body>
+</html>

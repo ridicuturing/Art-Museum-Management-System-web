@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>美术馆信息管理系统</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="table1.js"></script>
+
+</head>
+<body>
+<div class="jumbotron text-center" style="background:url(b1.jpg);background-size:cover;margin-bottom:0">
+  <h1>美术馆信息管理系统</h1> 
+</div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul id="menu" class="nav navbar-nav">
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <link rel="stylesheet" href="/static/dropzone/dropzone.css">
+      <script src="/static/dropzone/dropzone.js"></script>
+      <form  method="post" action="uploadFile" class="dropzone dz-clickable"></form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    username: user
+    password: 123
+    url: jdbc:mysql://ridm.xin:3306/gallery?useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script language="javascript">
+        $.ajaxSettings.async = false;
+        $.get(
+            "/getMyInformation",
+            function (data, status) {
+                if (data == "") {
+                    window.location = "/login.html";
+                }
+                else {
+                    window.location = "/artworksListPage.html";
+                }
+            }
+        )
+    </script>
+</head>
+<body>
+
+</body>
+</html>

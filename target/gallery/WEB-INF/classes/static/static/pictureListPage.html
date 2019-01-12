@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>美术馆信息管理系统</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/table1.js"></script>
+
+</head>
+<body>
+<div class="jumbotron text-center" style="background:url(/static/static/b1.jpg);background-size:cover;margin-bottom:0">
+  <h1>美术馆信息管理系统</h1>
+</div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul id="menu" class="nav navbar-nav">
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <table id="picturesListTable" class="table">
+  </table>
+</div>
+<script type="text/javascript">
+  var picturesListTableString="";
+  $(document).ready(function() {
+      $.ajaxSettings.async = false;
+      $.get(
+          "/getAllPictures",
+          function (data) {
+              picturesListTableString += "<caption>展品</caption>";
+              picturesListTableString += '<thead><tr><th>id</th><th>关联的艺术品id</th><th>管理人员id</th><th>描述</th><th>加入时间</th><th>url</th><th>操作</th></tr></thead><tbody>'
+              data.forEach(function (e) {
+                  picturesListTableString += '<tr><th>';
+                  picturesListTableString += e.id;
+                  picturesListTableString += '</th>';
+                  picturesListTableString += '<th>';
+                  picturesListTableString += e.artworkId;
+                  picturesListTableString += '</th>';
+                  picturesListTableString += '<th>';
+                  picturesListTableString += e.managerId;
+                  picturesListTableString += '</th>';
+                  picturesListTableString += '<th>';
+                  if(e.describe==null)
+                      picturesListTableString +='无';
+                  else
+                      picturesListTableString += e.describe;
+                  picturesListTableString += '</th>';
+                  picturesListTableString += '<th>';
+                  picturesListTableString += e.date;
+                  picturesListTableString += '</th>';
+                  picturesListTableString += '<th>';
+                  picturesListTableString += '<a href=' + e.url + '>' + e.url + '</a>';
+                  picturesListTableString += '</th>';
+                  picturesListTableString += '<th>';
+                  picturesListTableString += '<input type="button" value="详情" onclick="jump(\'/picture.html?' + e.id + '\')"class="btn btn-default"></input>';
+                  picturesListTableString += '<input type="button" value="删除" onclick="delPicture('+e.id+')" class="btn btn-default"></input>';
+                  picturesListTableString += '</th></tr>';
+              })
+          }
+      );
+      $("#picturesListTable").html(picturesListTableString);
+  });
+</script>
+</body>
+</html>

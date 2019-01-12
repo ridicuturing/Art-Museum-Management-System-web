@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>list.html</title>
+</head>
+<body>
+<h2>用户列表</h2>
+<div>
+    <ul>
+        <li th:each="user:${users}">
+            <p>ID:<span th:text="${user.id}"></span></p>
+            <p>名字:<span th:text="${user.name}"></span></p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+---------------------
+作者：cheungmine
+来源：CSDN
+原文：https://blog.csdn.net/ubuntu64fan/article/details/80555372
+版权声明：本文为博主原创文章，转载请附上博文链接！

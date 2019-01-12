@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>美术馆信息管理系统</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="table1.js"></script>
+
+</head>
+<body>
+<div class="jumbotron text-center" style="background:url(b1.jpg);background-size:cover;margin-bottom:0">
+  <h1>美术馆信息管理系统</h1> 
+</div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul id="menu" class="nav navbar-nav">
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <form role="form">
+        <div class="form-group">
+          <label for="searchArtworkByName">美术品名称查询</label><input type="text" class="form-control" id="searchArtworkByName" />
+          <input type="button" value="全称查询" onclick="searchArtworkByName1(1)" class="btn btn-default"></input>
+          <input type="button" value="正则查询" onclick="searchArtworkByName1(2)" class="btn btn-default"></input>
+          <input type="button" value="模糊查询" onclick="searchArtworkByName1(3)" class="btn btn-default"></input>
+        </div>
+        <div class="form-group">
+          <label for="searchPainter">艺术家查询</label><input type="text" class="form-control" id="searchPainter" />
+          <input type="button" value="全称查询" onclick="searchArtworkByPainter1(1)" class="btn btn-default"></input>
+          <input type="button" value="正则查询" onclick="searchArtworkByPainter1(2)" class="btn btn-default"></input>
+          <input type="button" value="模糊查询" onclick="searchArtworkByPainter1(3)" class="btn btn-default"></input>
+        </div>
+        <div class="form-group">
+          <label for="managerName">管理员相关艺术品</label><input type="text" value="管理员名字" class="form-control" id="managerName" />
+          <input type="button" value="全称查询" onclick="searchByManager(1)" class="btn btn-default"></input>
+          <input type="button" value="正则查询" onclick="searchByManager(2)" class="btn btn-default"></input>
+          <input type="button" value="模糊查询" onclick="searchByManager(3)" class="btn btn-default"></input>
+        </div>
+        <div class="form-group">
+          <label for="managerName2">管理员相关图片</label><input type="text" value="管理员名字" class="form-control" id="managerName2" />
+          <input type="button" value="全称查询" onclick="searchPicturesByManager(1)" class="btn btn-default"></input>
+          <input type="button" value="正则查询" onclick="searchPicturesByManager(2)" class="btn btn-default"></input>
+          <input type="button" value="模糊查询" onclick="searchPicturesByManager(3)" class="btn btn-default"></input>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <table id="searchTable" class="table">
+  </table>
+</div>
+<script type="text/javascript">
+    function searchArtworkByName(i){
+        alert("a");
+        var url= "searchArtworkByName"+i
+        var name=$("#searchArtworkByName").val();
+        $.get(
+            url,
+            {"name":name},
+            function (data) {
+                showSearchTable(data);
+            }
+        );
+    };
+    $(document).ready(function() {
+
+    });
+</script>
+</body>
+</html>
